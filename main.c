@@ -8,6 +8,7 @@ typedef struct Node {
 } Node;
 
 Node* createNode(Node* head, int data);
+Node* insertNode(Node* head, unsigned position, int data);
 Node* readNode(Node* head, unsigned position);
 void printNodes(Node* head);
 
@@ -23,6 +24,12 @@ int main() {
     int i = 2;
     Node* node = readNode(head, i);
     printf("\nNode read: index = %d, addr = %p, data = %d, next = %p\n", i, node, node->data, node->next);
+
+    printf("NOw, let's create a node in index 2\n");
+
+    insertNode(head, 2, 222);
+
+    printNodes(head);
 
     return 0;
 }
@@ -42,6 +49,39 @@ Node* createNode(Node* head, int data) {
 
     new_node->data = data;
     new_node->next = NULL;
+
+    return new_node;
+}
+
+Node* insertNode(Node* head, unsigned position, int data) {
+    Node* new_node = malloc(sizeof(Node));
+
+    if (head == NULL) {
+        new_node->data = data;
+        new_node->next = NULL;
+        return new_node;
+    }
+
+    Node* last_node = NULL;
+    Node* current_node = head;
+    unsigned count = 0;
+
+    while (count < position && current_node->next) {
+        last_node = current_node;
+        current_node = current_node->next;
+        count++;
+    }
+
+    if (count < position && current_node->next == NULL) {
+        exit(1);
+    }
+
+    if (last_node) {
+        last_node->next = new_node;
+    }
+
+    new_node->data = data;
+    new_node->next = current_node;
 
     return new_node;
 }
