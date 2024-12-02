@@ -24,27 +24,22 @@ int main() {
     Node* node = readNode(head, i);
     printf("\nNode read: index = %d, addr = %p, data = %d, next = %p\n", i, node, node->data, node->next);
 
-
-
     return 0;
 }
 
 Node* createNode(Node* head, int data) {
-    if (head == NULL) {
-        Node* new_node = malloc(sizeof(Node));
-        new_node->data = data;
-        new_node->next = NULL;
-        return new_node;
-    }
-
-    Node* current_node = head;
     Node* new_node = malloc(sizeof(Node));
 
-    while (current_node->next) {
-        current_node = current_node->next;
+    if (head != NULL) {
+        Node* current_node = head;
+
+        while (current_node->next) {
+            current_node = current_node->next;
+        }
+
+        current_node->next = new_node;
     }
 
-    current_node->next = new_node;
     new_node->data = data;
     new_node->next = NULL;
 
