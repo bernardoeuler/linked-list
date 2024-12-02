@@ -7,16 +7,16 @@ typedef struct Node {
     struct Node* next;
 } Node;
 
-Node* createNode(Node* head, int data);
+Node* appendNode(Node* head, int data);
 Node* insertNode(Node* head, unsigned position, int data);
 Node* readNode(Node* head, unsigned position);
 void printNodes(Node* head);
 
 int main() {
-    Node* head = createNode(NULL, 1);
+    Node* head = appendNode(NULL, 1);
 
     for (int i = 2; i <= 10; i++) {
-        createNode(head, i);
+        appendNode(head, i);
     }
 
     printNodes(head);
@@ -34,7 +34,7 @@ int main() {
     return 0;
 }
 
-Node* createNode(Node* head, int data) {
+Node* appendNode(Node* head, int data) {
     Node* new_node = malloc(sizeof(Node));
 
     if (head != NULL) {
