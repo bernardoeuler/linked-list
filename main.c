@@ -50,7 +50,7 @@ Node* createNode(Node* head, int data) {
     new_node->data = data;
     new_node->next = NULL;
 
-    return new_node;
+    return head;
 }
 
 Node* insertNode(Node* head, unsigned position, int data) {
@@ -83,7 +83,11 @@ Node* insertNode(Node* head, unsigned position, int data) {
     new_node->data = data;
     new_node->next = current_node;
 
-    return new_node;
+    if (count == 0) {
+        head = new_node;
+    }
+
+    return head;
 }
 
 Node* readNode(Node* head, unsigned position) {
