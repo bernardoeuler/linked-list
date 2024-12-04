@@ -16,7 +16,7 @@ int main() {
     Node* node = readNode(head, i);
     printf("\nNode read: index = %d, addr = %p, data = %d, next = %p\n", i, node, node->data, node->next);
 
-    printf("NOw, let's create a node in index 2\n");
+    printf("Now, let's create a node at index 2\n");
 
     insertNode(head, 2, 222);
 
