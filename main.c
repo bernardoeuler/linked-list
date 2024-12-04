@@ -49,6 +49,10 @@ Node* appendNode(Node* head, int data) {
     new_node->data = data;
     new_node->next = NULL;
 
+    if (head == NULL) {
+        head = new_node;
+    }
+
     return head;
 }
 
