@@ -63,6 +63,36 @@ Node* insertNode(Node* head, unsigned position, int data) {
     return head;
 }
 
+Node* removeNode(Node* head, unsigned position) {
+    if (head == NULL) {
+        return NULL;
+    }
+
+    Node* last_node = NULL;
+    Node* current_node = head;
+    unsigned count = 0;
+
+    while (count < position && current_node) {
+        last_node = current_node;
+        current_node = current_node->next;
+        count++;
+    }
+
+    if (current_node == NULL) {
+        return NULL;
+    }
+
+    if (last_node) {
+        last_node->next = current_node->next;
+    } else {
+        head = current_node->next;
+    }
+
+    free(current_node);
+
+    return head;
+}
+
 Node* readNode(Node* head, unsigned position) {
     if (head == NULL) {
         return NULL;
