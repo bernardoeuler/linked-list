@@ -4,29 +4,26 @@
 #include "linked-list.h"
 
 int main() {
-    Node* head = appendNode(NULL, 1);
+    Node* head = NULL;
 
-    for (int i = 2; i <= 10; i++) {
-        appendNode(head, i);
+    for (int i = 1; i <= 10; i++) {
+        appendNode(&head, i);
     }
 
+    printf("Linked list now:\n");
     printNodes(head);
 
-    int i = 2;
-    Node* node = readNode(head, i);
-    printf("\nNode read: index = %d, addr = %p, data = %d, next = %p\n", i, node, node->data, node->next);
+    insertNode(&head, 0, 0);
 
-    printf("\nNow, let's create a node at index 2\n");
+    printf("\nAdding new node at first position\n");
+    printNodes(head);
 
-    insertNode(head, 2, 222);
+    printf("\nRemoving node at first position\n");
+    Node* removed_node = removeNode(&head, 0);
 
     printNodes(head);
 
-    printf("\nNow, let's remove this newly created node\n");
-
-    removeNode(head, 2);
-
-    printNodes(head);
+    printf("\nThe removed node was %p.\n", removed_node);
 
     return 0;
 }

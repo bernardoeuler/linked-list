@@ -3,11 +3,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Node* appendNode(Node* head, int data) {
+Node* appendNode(Node** head, int data) {
     Node* new_node = malloc(sizeof(Node));
 
-    if (head != NULL) {
-        Node* current_node = head;
+    if (*head != NULL) {
+        Node* current_node = *head;
 
         while (current_node->next) {
             current_node = current_node->next;
@@ -19,24 +19,24 @@ Node* appendNode(Node* head, int data) {
     new_node->data = data;
     new_node->next = NULL;
 
-    if (head == NULL) {
-        head = new_node;
+    if (*head == NULL) {
+        *head = new_node;
     }
 
-    return head;
+    return new_node;
 }
 
-Node* insertNode(Node* head, unsigned position, int data) {
+Node* insertNode(Node** head, unsigned position, int data) {
     Node* new_node = malloc(sizeof(Node));
 
-    if (head == NULL) {
+    if (*head == NULL) {
         new_node->data = data;
         new_node->next = NULL;
         return new_node;
     }
 
     Node* last_node = NULL;
-    Node* current_node = head;
+    Node* current_node = *head;
     unsigned count = 0;
 
     while (count < position && current_node->next) {
@@ -57,19 +57,19 @@ Node* insertNode(Node* head, unsigned position, int data) {
     new_node->next = current_node;
 
     if (count == 0) {
-        head = new_node;
+        *head = new_node;
     }
 
-    return head;
+    return new_node;
 }
 
-Node* removeNode(Node* head, unsigned position) {
-    if (head == NULL) {
+Node* removeNode(Node** head, unsigned position) {
+    if (*head == NULL) {
         return NULL;
     }
 
     Node* last_node = NULL;
-    Node* current_node = head;
+    Node* current_node = *head;
     unsigned count = 0;
 
     while (count < position && current_node) {
@@ -85,12 +85,12 @@ Node* removeNode(Node* head, unsigned position) {
     if (last_node) {
         last_node->next = current_node->next;
     } else {
-        head = current_node->next;
+        *head = current_node->next;
     }
 
     free(current_node);
 
-    return head;
+    return current_node;
 }
 
 Node* readNode(Node* head, unsigned position) {
